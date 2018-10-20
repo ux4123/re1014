@@ -20,7 +20,8 @@ struct PIDstruct
 		float sumError;
 		float setPoint;
 };
-struct PIDstruct xPID={0.1,0,0,0.7,0,0,0};
+//angle = 0.7
+struct PIDstruct xPID={0.1,0,0,0,0,0,0};
 
 struct PIDstruct turnPID={1,0,0,0,0,0,80};
 
