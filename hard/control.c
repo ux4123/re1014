@@ -1,11 +1,12 @@
 #include "control.h"
 #include "dianji.h"
 
-float pitch=0,roll=0,yaw=0;
+float pitch=0,roll=0,yaw=0,acroll=0;
 //float kp=0.5,kd=0,ki=0;
 //float temp1=0,temp2=0;
 //u8 fanxiang=0;
 int jifenxianfu=1000;
+int pwmaddA=0,pwmaddB=0;
 u8 kongzhi;
 
 
@@ -20,7 +21,8 @@ struct PIDstruct
 		float sumError;
 		float setPoint;
 };
-struct PIDstruct xPID={0.1,0,0,0.7,0,0,0};
+//angle = 0.7
+struct PIDstruct xPID={0.1,0,0,0,0,0,0};
 
 struct PIDstruct turnPID={1,0,0,0,0,0,80};
 
@@ -245,19 +247,72 @@ void send_roll(USART_TypeDef* u1)
 		USART_SendData(u1,mroll%256);	
 }
 
+//*****************************************************
+int balance(float Angle,float Gyro)
+{  
+   float Bias;
+	 int balance;
+	 Bias=Angle-15;       //===Çó³öÆ½ºâµÄ½Ç¶ÈÖÐÖµ ºÍ»úÐµÏà¹Ø
+//	 if((Bias<1)&&(Bias>-1)) return 0; 
+	 xPID.sumError+=Bias;
+		 if((Bias>15)||(Bias<-15)) balance=xPID.kp*10*Bias+Gyro*xPID.kd+xPID.ki*xPID.sumError;
+			else balance=xPID.kp*Bias+Gyro*xPID.kd+xPID.ki*xPID.sumError;
+//	 if(Bias>15) balance=xPID.kp*10*Bias+Gyro*xPID.kd+xPID.ki*xPID.sumError;
+//	 else	 balance=xPID.kp*Bias+Gyro*xPID.kd+xPID.ki*xPID.sumError;   //===¼ÆËãÆ½ºâ¿ØÖÆµÄµç»úPWM  PD¿ØÖÆ   kpÊÇPÏµÊý kdÊÇDÏµÊý 
+//	 if(balance<5) balance=0;
+	 
+	 return balance;
+}
+
+
+//*****************************************************
+
+void set_pwmNow(int a,int b)
+{
+	
+	{
+    if(a<=0)
+    {
+        AIN1(1);AIN2(0);a=-a;	
+    }
+    else 
+    {
+        AIN1(0);AIN2(1);
+				
+				
+    }
+		if(b<=0)
+		{
+				BIN1(0);BIN2(1);b=-b;
+		}
+		else 
+		{
+				BIN1(1);BIN2(0);
+		}
+		a=(a>880)?880:a;
+		b=(b>880)?880:b;
+    TIM_SetCompare1(TIM3,120+a);
+  	TIM_SetCompare4(TIM3,120+b);
+	}
+
+
+}
 
 void EXTI3_IRQHandler(void)
 {
 		static int stateSend=0;
+		int pwmout=0;
 		int mroll=0;
 		xPID.setPoint=0;
     if(EXTI_GetFlagStatus(EXTI_Line3)!=RESET)
     {
-				if(mpu_dmp_get_data(&pitch,&roll,&yaw)==0)
+				if(mpu_dmp_get_data(&pitch,&roll,&yaw,&acroll)==0)
 				{ 
 						xPID.angle=roll;
-						set_pwm(pid_cal(&xPID));
-			
+						//set_pwm(pid_cal(&xPID));
+						pwmout=-balance(roll,acroll);
+						set_pwmNow(pwmout+pwmaddA,pwmout+pwmaddB);
+						//set_pwm(-balance(roll,acroll));
 						//right();
 						switch(stateSend)
 						{
@@ -330,9 +385,9 @@ void USART1_IRQHandler(void)
 #if 1
 		switch((recData&0xc0)>>6)
 		{
-			case 1:xPID.kp=(recData&0x3f)/10.0;break;
+			case 1:xPID.kp=(recData&0x3f)/100.0;break;
 			case 2:xPID.sumError=0;xPID.ki=(recData&0x3f)/100.0;break;
-			case 3:xPID.kd=(recData&0x3f)/10.0;break;
+			case 3:xPID.kd=(recData&0x3f)/1000.0;break;
 			case 0:
 						if(recData==0x3f)
 						{
@@ -348,27 +403,39 @@ void USART1_IRQHandler(void)
 						}
 						else if(recData<=0x17)
 						{
-								AIN1(1);AIN2(0);BIN1(1);BIN2(0);
-								TIM_SetCompare1(TIM3,800+(recData&0x3f));
-								TIM_SetCompare4(TIM3,800+(recData&0x3f));
-								AIN1(1);AIN2(0);BIN1(0);BIN2(1);
-								TIM_SetCompare1(TIM3,600);
-								TIM_SetCompare4(TIM3,600);
+									pwmaddA=-500;
+									pwmaddB=0;
+//								AIN1(1);AIN2(0);BIN1(1);BIN2(0);
+//								TIM_SetCompare1(TIM3,800+(recData&0x3f));
+//								TIM_SetCompare4(TIM3,800+(recData&0x3f));
+//								AIN1(1);AIN2(0);BIN1(0);BIN2(1);
+//								TIM_SetCompare1(TIM3,600);
+//								TIM_SetCompare4(TIM3,600);
 						}
 						else if((recData>=0x1a)&&(recData<=0x31))
 						{
-								AIN1(0);AIN2(1);BIN1(0);BIN2(1);
-								TIM_SetCompare1(TIM3,800+490-(recData&0x3f));
-								TIM_SetCompare4(TIM3,800+490-(recData&0x3f));	
-								AIN1(1);AIN2(0);BIN1(0);BIN2(1);
-								TIM_SetCompare1(TIM3,600);
-								TIM_SetCompare4(TIM3,600);
+									pwmaddA=0;
+									pwmaddB=-500;
+//								AIN1(0);AIN2(1);BIN1(0);BIN2(1);
+//								TIM_SetCompare1(TIM3,800+490-(recData&0x3f));
+//								TIM_SetCompare4(TIM3,800+490-(recData&0x3f));	
+//								AIN1(1);AIN2(0);BIN1(0);BIN2(1);
+//								TIM_SetCompare1(TIM3,600);
+//								TIM_SetCompare4(TIM3,600);
 						}
 						else if((recData<=0x19)&&(recData>=0x18))
 						{
-								AIN1(1);AIN2(0);BIN1(0);BIN2(1);
-								TIM_SetCompare1(TIM3,600);
-								TIM_SetCompare4(TIM3,600);		
+									pwmaddA=-200;
+									pwmaddB=-200;
+//								AIN1(1);AIN2(0);BIN1(0);BIN2(1);
+//								TIM_SetCompare1(TIM3,600);
+//								TIM_SetCompare4(TIM3,600);		
+						}
+						else if(recData==0x3e)
+						{
+									pwmaddA=0;
+									pwmaddB=0;
+						
 						}
 						break;
 			default:break;

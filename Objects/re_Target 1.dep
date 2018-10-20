@@ -25,7 +25,7 @@ I (..\re0802\mysys.h)(0x5B1BBC8B)
 I (.\hard\delay.h)(0x555AC82B)
 I (.\hard\myUsart.h)(0x5B1CCEFB)
 I (.\hard\dianji.h)(0x5B30C214)
-I (.\hard\mpu6050\inv_mpu.h)(0x54B9E068)
+I (.\hard\mpu6050\inv_mpu.h)(0x5BCA86F6)
 F (.\hard\common.c)(0x5B3751ED)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\re0802 -I .\hard -I .\hard\mpu6050-I.\RTE\Device\STM32F103RE-I.\RTE\_Target_1-ID:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\inc-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\RTE_Driver-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD-o .\objects\common.o --omf_browse .\objects\common.crf --depend .\objects\common.d)
 I (hard\common.h)(0x5B1D4253)
 I (..\re0802\mysys.h)(0x5B1BBC8B)
@@ -52,10 +52,10 @@ I (.\hard\myUsart.h)(0x5B1CCEFB)
 I (hard\dianji.h)(0x5B30C214)
 I (.\hard\mpu6050\mpu6050.h)(0x5B363953)
 I (.\hard\mpu6050\mpuiic.h)(0x5B363A29)
-I (.\hard\mpu6050\inv_mpu.h)(0x54B9E068)
+I (.\hard\mpu6050\inv_mpu.h)(0x5BCA86F6)
 I (D:\myprogram\keil\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
 I (D:\myprogram\keil\ARM\ARMCC\include\string.h)(0x599ECD2C)
-F (.\hard\control.c)(0x5BC990A4)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\re0802 -I .\hard -I .\hard\mpu6050-I.\RTE\Device\STM32F103RE-I.\RTE\_Target_1-ID:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\inc-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\RTE_Driver-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD-o .\objects\control.o --omf_browse .\objects\control.crf --depend .\objects\control.d)
+F (.\hard\control.c)(0x5BCAE035)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\re0802 -I .\hard -I .\hard\mpu6050-I.\RTE\Device\STM32F103RE-I.\RTE\_Target_1-ID:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\inc-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\RTE_Driver-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD-o .\objects\control.o --omf_browse .\objects\control.crf --depend .\objects\control.d)
 I (hard\control.h)(0x5B1D4223)
 I (..\re0802\mysys.h)(0x5B1BBC8B)
 I (D:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include\stm32f10x.h)(0x5825386C)
@@ -80,7 +80,7 @@ I (.\hard\delay.h)(0x555AC82B)
 I (.\hard\myUsart.h)(0x5B1CCEFB)
 I (.\hard\mpu6050\mpu6050.h)(0x5B363953)
 I (.\hard\mpu6050\mpuiic.h)(0x5B363A29)
-I (.\hard\mpu6050\inv_mpu.h)(0x54B9E068)
+I (.\hard\mpu6050\inv_mpu.h)(0x5BCA86F6)
 I (hard\common.h)(0x5B1D4253)
 I (hard\dianji.h)(0x5B30C214)
 F (.\hard\delay.c)(0x555AC82A)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\re0802 -I .\hard -I .\hard\mpu6050-I.\RTE\Device\STM32F103RE-I.\RTE\_Target_1-ID:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\inc-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\RTE_Driver-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
@@ -185,13 +185,13 @@ I (D:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\i
 I (D:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\inc\misc.h)(0x52F9EB20)
 I (hard\usart.h)(0x50517A82)
 I (D:\myprogram\keil\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-F (.\hard\mpu6050\inv_mpu.c)(0x5B383657)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\re0802 -I .\hard -I .\hard\mpu6050-I.\RTE\Device\STM32F103RE-I.\RTE\_Target_1-ID:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\inc-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\RTE_Driver-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD-o .\objects\inv_mpu.o --omf_browse .\objects\inv_mpu.crf --depend .\objects\inv_mpu.d)
+F (.\hard\mpu6050\inv_mpu.c)(0x5BCA86DD)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\re0802 -I .\hard -I .\hard\mpu6050-I.\RTE\Device\STM32F103RE-I.\RTE\_Target_1-ID:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\StdPeriph_Driver\inc-ID:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\RTE_Driver-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD-o .\objects\inv_mpu.o --omf_browse .\objects\inv_mpu.crf --depend .\objects\inv_mpu.d)
 I (D:\myprogram\keil\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\myprogram\keil\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (D:\myprogram\keil\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
 I (D:\myprogram\keil\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\myprogram\keil\ARM\ARMCC\include\math.h)(0x599ECD2E)
-I (hard\mpu6050\inv_mpu.h)(0x54B9E068)
+I (hard\mpu6050\inv_mpu.h)(0x5BCA86F6)
 I (D:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include\stm32f10x.h)(0x5825386C)
 I (.\RTE\_Target_1\RTE_Components.h)(0x5B62DA84)
 I (D:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\core_cm3.h)(0x5B617084)
@@ -220,7 +220,7 @@ I (D:\myprogram\keil\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (D:\myprogram\keil\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
 I (D:\myprogram\keil\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\myprogram\keil\ARM\ARMCC\include\math.h)(0x599ECD2E)
-I (hard\mpu6050\inv_mpu.h)(0x54B9E068)
+I (hard\mpu6050\inv_mpu.h)(0x5BCA86F6)
 I (D:\myprogram\keil\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include\stm32f10x.h)(0x5825386C)
 I (.\RTE\_Target_1\RTE_Components.h)(0x5B62DA84)
 I (D:\myprogram\keil\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\core_cm3.h)(0x5B617084)
