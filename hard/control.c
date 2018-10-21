@@ -367,7 +367,7 @@ void EXTI3_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
 	u8 recData;
-	static u8 recstate=0;
+//	static u8 recstate=0;
 	if(USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET)
 	{		
 		recData=USART_ReceiveData(USART1);
@@ -391,17 +391,13 @@ void USART1_IRQHandler(void)
 			case 0:
 						if(recData==0x3f)
 						{
-							if(recstate==0) 
-							{
-								USART_Cmd(UART5,ENABLE);
-								recstate=1;
-							}else 
-							{
-								USART_Cmd(UART5,DISABLE);
-								recstate=0;
-							}
+								USART_Cmd(UART5,ENABLE);				
 						}
-						else if(recData<=0x17)
+						else if(recData==0x3d) 
+						{
+								USART_Cmd(UART5,DISABLE);
+						}
+						else if(recData<=0x10)
 						{
 									pwmaddA=-500;
 									pwmaddB=0;
@@ -412,7 +408,7 @@ void USART1_IRQHandler(void)
 //								TIM_SetCompare1(TIM3,600);
 //								TIM_SetCompare4(TIM3,600);
 						}
-						else if((recData>=0x1a)&&(recData<=0x31))
+						else if((recData>=0x21)&&(recData<=0x31))
 						{
 									pwmaddA=0;
 									pwmaddB=-500;
@@ -423,7 +419,7 @@ void USART1_IRQHandler(void)
 //								TIM_SetCompare1(TIM3,600);
 //								TIM_SetCompare4(TIM3,600);
 						}
-						else if((recData<=0x19)&&(recData>=0x18))
+						else if((recData<=0x20)&&(recData>=0x11))
 						{
 									pwmaddA=-200;
 									pwmaddB=-200;
@@ -511,9 +507,9 @@ void UART5_IRQHandler(void)
 //		turn_pwm(pid_cal(&turnPID));
 		switch(recData)
 		{
-			case 0x03:left();break;
-			case 0x02:right();break;
-			case 0x00:ahead();break;
+			case 0x02:pwmaddA=-200;pwmaddB=0;break;
+			case 0x03:pwmaddA=0;pwmaddB=-200;break;
+			case 0x00:pwmaddA=-200;pwmaddB=-200;break;
 			default:break;
 		}
 //		switch((recData&0xc0)>>6)
