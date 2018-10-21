@@ -509,7 +509,8 @@ void UART5_IRQHandler(void)
 		{
 			case 0x02:pwmaddA=-200;pwmaddB=0;break;
 			case 0x03:pwmaddA=0;pwmaddB=-200;break;
-			case 0x00:pwmaddA=-200;pwmaddB=-200;break;
+			case 0x00:pwmaddA=-500;pwmaddB=-500;break;
+			case 0x04:pwmaddA=0;pwmaddB=0;break;
 			default:break;
 		}
 //		switch((recData&0xc0)>>6)
